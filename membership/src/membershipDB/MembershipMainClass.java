@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 import dto.MembershipDto;
 import dao.MembershipDao;
+import naverapi.MainClass;
 
-public class MainClass {
+public class MembershipMainClass {
 
 	public static void main(String[] args) {
 		MembershipDto dto = new MembershipDto();
@@ -50,6 +51,9 @@ public class MainClass {
 		System.out.print("비밀번호: ");
 		String myp = sc.next();
 		dao.checkMem(mye, myp);
+		
+		MainClass mc = new MainClass();
+		mc.main(args);
 		}
 		
 		else if(num==3) {
