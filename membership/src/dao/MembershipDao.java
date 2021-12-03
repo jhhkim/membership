@@ -100,24 +100,20 @@ public class MembershipDao {
     }
     
     //pw 변경
-    public void changePassword(String email, String password) {
+    public void changePassword(String email, String password, String newpw) {
         String sql = "UPDATE membership SET password =? WHERE email =?";
         PreparedStatement pstmt = null;
         try {
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
-            if(rs.next()) {
-            	email = rs.getString("email");
-                System.out.println("새 비밀번호: ");
-                Scanner newpw = new Scanner(System.in);
-                String npw = newpw.next();
-                pstmt.setString(1, npw);
+           while(rs.next()) { if(rs.getString("email").equals(email)&&rs.getString("password").equals(password)) {
+                pstmt.setString(1, newpw);
+                pstmt.setString(2, email); 
                 pstmt.executeUpdate();
                 System.out.println("비밀번호 변경 성공");
-                
+                break;
             }
+           }
             
         } catch (Exception e) {
             System.out.println("비밀번호 변경 실패");
