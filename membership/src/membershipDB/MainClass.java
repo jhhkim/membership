@@ -46,6 +46,20 @@ public class MainClass {
 		String myp = mypassword.next();
 		dao.checkMem(mye, myp);
 		
+		//pw 변경
+		System.out.println("비밀번호 변경 시작");
+		Scanner myemailc = new Scanner(System.in);
+		System.out.print("이메일: ");
+		String myec = myemailc.next();
+				
+		Scanner mypasswordc = new Scanner(System.in);
+		System.out.print("비밀번호: ");
+		String mypc = mypasswordc.next();
+		
+		dao.changePassword(myec, mypc);
+		
 	}
+	
+			
 
 }

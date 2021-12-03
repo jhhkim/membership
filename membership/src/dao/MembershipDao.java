@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import comf.Util;
 import dto.MembershipDto;
@@ -98,7 +99,36 @@ public class MembershipDao {
         }
     }
     
-   
+    //pw 변경
+    public void changePassword(String email, String password) {
+        String sql = "UPDATE membership SET password =? WHERE email =?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()) {
+            	email = rs.getString("email");
+                System.out.println("새 비밀번호: ");
+                Scanner newpw = new Scanner(System.in);
+                String npw = newpw.next();
+                pstmt.setString(1, npw);
+                pstmt.executeUpdate();
+                System.out.println("비밀번호 변경 성공");
+                
+            }
+            
+        } catch (Exception e) {
+            System.out.println("비밀번호 변경 실패");
+        }    finally {
+            try {
+                if(pstmt!=null && !pstmt.isClosed()) {
+                    pstmt.close();
+                }
+            } catch (Exception e2) {}
+        }
+    }
           
         
 
