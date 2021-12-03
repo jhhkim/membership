@@ -53,7 +53,16 @@ public class MembershipMainClass {
 		dao.checkMem(mye, myp);
 		
 		MainClass mc = new MainClass();
+		
+		while(true) {
 		mc.main(args);
+		System.out.println("더 검색하려면 1, 종료하려면 0을 입력하십시오.");
+		int n = sc.nextInt();
+			if(n==0) {
+				System.out.println("종료되었습니다.");
+				break;
+				}
+			}
 		}
 		
 		else if(num==3) {
